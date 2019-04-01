@@ -1,19 +1,29 @@
-const display = document.querySelector("#display");
+function timer(seconds) {
+  const now = Date.now();
+  const end = now + seconds * 1000;
+  displayTimeLeft(seconds);
+  
+  countdown = setInterval(() => {
+    const secondsLeft = Math.round((end - Date.now()) / 1000);
 
-let workTime = 1500;
-let breakTime = 300;
+    if(secondsLeft < 0) {
+      clearInterval(countdown);
+      return;
+    }
 
-function formatTime(i) {
-  return (i < 10) ? "0" + i : i;
+    displayTimeLeft(secondsLeft);
+  },1000);
 }
 
-function timer() {
-  min = formatTime(Math.floor((workTime % 3600) / 60));
-  sec = formatTime((workTime % 3600) % 60); 
-  display.textContent = `${min}:${sec}`;
-  workTime--;
+function displayTimeLeft(seconds) {
+  min = Math.floor((seconds % 3600) / 60 );
+  sec = (seconds % 3600) % 60;
+  const display = `${min < 10 ? '0' : '' }${min}:${sec < 10 ? '0' : ''}${sec}`;
+  console.log(display);
+  document.title = display;
 }
 
-document.querySelector("#start").addEventListener("click", () => {
-  setInterval(timer, 1000);
-});
+function startTimer() {
+  // ....
+  
+}
