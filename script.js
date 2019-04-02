@@ -49,8 +49,13 @@ document.querySelector(".play").addEventListener("click", startTimer);
 document.querySelector(".decr-work").addEventListener("click",decreaseWorkTime);
 document.querySelector(".incr-break").addEventListener("click",increaseBreakTime);
 document.querySelector(".decr-break").addEventListener("click",decreaseBreakTime);
+document.querySelector(".restart").addEventListener("click", restart);
+document.querySelector(".stop").addEventListener("click", () => {
+  clearInterval(countdown);
+  displayTimeLeft(1500);
+});
 
-/////
+/************************************************/
 
 function increaseWorkTime() {
   let newTime = parseInt(document.querySelector(".play").dataset.time) + 60;
@@ -103,3 +108,13 @@ function formatTime(seconds) {
   sec = (seconds % 3600) % 60;
   return `${min < 10 ? '0' : '' }${min}:${sec < 10 ? '0' : ''}${sec}`;
 }
+
+function restart() {
+  document.querySelector(".play").dataset.time = 1500;
+  document.querySelector(".break").dataset.time = 300;
+  displayTimeLeft(1500);
+  displayBreakTime(300);
+  displayWorkTime(1500);
+  clearInterval(countdown);
+}
+
