@@ -1,4 +1,5 @@
 let countdown;
+let go = false;
 
 function timer(seconds) {
   clearInterval(countdown);
@@ -6,9 +7,12 @@ function timer(seconds) {
   const now = Date.now();
   const end = now + seconds * 1000;
   
+  
+
   mode = document.querySelector(".mode").dataset.mode;
   
   countdown = setInterval(() => {
+    if(!go) return;
     const secondsLeft = Math.round((end - Date.now()) / 1000);
     displayTimeLeft(secondsLeft);
     if(secondsLeft == 0) {
@@ -29,6 +33,7 @@ function timer(seconds) {
     else
     displayTimeLeft(secondsLeft);
   }, 1000);
+
 }
 
 function displayTimeLeft(seconds) {
@@ -38,14 +43,14 @@ function displayTimeLeft(seconds) {
 }
 
 function startTimer() {
+  go = true;
   const seconds = parseInt(this.dataset.time);
   timer(seconds);
 }
 
 ////// EVENT LISTENERS //////
-
-document.querySelector(".incr-work").addEventListener("click",increaseWorkTime);
 document.querySelector(".play").addEventListener("click", startTimer);
+document.querySelector(".incr-work").addEventListener("click",increaseWorkTime);
 document.querySelector(".decr-work").addEventListener("click",decreaseWorkTime);
 document.querySelector(".incr-break").addEventListener("click",increaseBreakTime);
 document.querySelector(".decr-break").addEventListener("click",decreaseBreakTime);
@@ -54,6 +59,7 @@ document.querySelector(".stop").addEventListener("click", () => {
   clearInterval(countdown);
   displayTimeLeft(1500);
 });
+document.querySelector(".pause").addEventListener("click", pause);
 
 /************************************************/
 
@@ -118,3 +124,6 @@ function restart() {
   clearInterval(countdown);
 }
 
+function pause() {
+  go = false;
+}
