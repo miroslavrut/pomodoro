@@ -6,48 +6,33 @@ function timer(seconds) {
   const now = Date.now();
   const end = now + seconds * 1000;
   
-  const session = true;
-  updateMode(session);
-
+  mode = document.querySelector(".mode").dataset.mode;
+  
   countdown = setInterval(() => {
     const secondsLeft = Math.round((end - Date.now()) / 1000);
     displayTimeLeft(secondsLeft);
     if(secondsLeft == 0) {
+      let seconds;
+      if(mode == "work") {
+        document.querySelector(".mode").dataset.mode = "break";
+        updateMode();
+        seconds = parseInt(document.querySelector(".break").dataset.time);
+      }
+      else {
+        document.querySelector(".mode").dataset.mode = "work";
+        updateMode(1);
+        seconds = parseInt(document.querySelector(".play").dataset.time);
+      }
       alarm();
-      let seconds = parseInt(document.querySelector(".break").dataset.time);
-      breakTimer(seconds);
-    }
-    else
-    displayTimeLeft(secondsLeft);
-  }, 1000);
-  
-}
-
-function breakTimer(seconds) {
-  clearInterval(countdown);
-  displayTimeLeft(seconds);
-  const now = Date.now();
-  const end = now + seconds * 1000;
-
-  updateMode();
-  
-  countdown = setInterval(() => {
-    const secondsLeft = Math.round((end - Date.now()) / 1000);
-    if(secondsLeft == 0) {
-      alarm();
-      let seconds = parseInt(document.querySelector(".play").dataset.time);
       timer(seconds);
     }
     else
     displayTimeLeft(secondsLeft);
   }, 1000);
-
 }
 
 function displayTimeLeft(seconds) {
-  min = Math.floor((seconds % 3600) / 60 );
-  sec = (seconds % 3600) % 60;
-  const display = `${min < 10 ? '0' : '' }${min}:${sec < 10 ? '0' : ''}${sec}`;
+  const display = formatTime(seconds);
   document.querySelector(".time").textContent = display;
   document.title = display;
 }
@@ -57,12 +42,15 @@ function startTimer() {
   timer(seconds);
 }
 
+////// EVENT LISTENERS //////
+
 document.querySelector(".incr-work").addEventListener("click",increaseWorkTime);
 document.querySelector(".play").addEventListener("click", startTimer);
 document.querySelector(".decr-work").addEventListener("click",decreaseWorkTime);
-
 document.querySelector(".incr-break").addEventListener("click",increaseBreakTime);
 document.querySelector(".decr-break").addEventListener("click",decreaseBreakTime);
+
+/////
 
 function increaseWorkTime() {
   let newTime = parseInt(document.querySelector(".play").dataset.time) + 60;
@@ -91,16 +79,12 @@ function decreaseBreakTime() {
 }
 
 function displayBreakTime(seconds) {
-  min = Math.floor((seconds % 3600) / 60 );
-  sec = (seconds % 3600) % 60;
-  const display = `${min < 10 ? '0' : '' }${min}:${sec < 10 ? '0' : ''}${sec}`;
+  const display = formatTime(seconds);
   document.querySelector(".settings-break").textContent = display;
 }
 
 function displayWorkTime(seconds) {
-  min = Math.floor((seconds % 3600) / 60 );
-  sec = (seconds % 3600) % 60;
-  const display = `${min < 10 ? '0' : '' }${min}:${sec < 10 ? '0' : ''}${sec}`;
+  const display = formatTime(seconds);
   document.querySelector(".settings-work").textContent = display; 
 }
 
@@ -112,4 +96,10 @@ function updateMode(session) {
 function alarm() {
   var audio = new Audio("alert.mp3");
   audio.play();
+}
+
+function formatTime(seconds) {
+  min = Math.floor((seconds % 3600) / 60 );
+  sec = (seconds % 3600) % 60;
+  return `${min < 10 ? '0' : '' }${min}:${sec < 10 ? '0' : ''}${sec}`;
 }
