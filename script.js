@@ -33,8 +33,8 @@ function breakTimer(seconds) {
   
   countdown = setInterval(() => {
     const secondsLeft = Math.round((end - Date.now()) / 1000);
-
     if(secondsLeft == 0) {
+      alarm();
       let seconds = parseInt(document.querySelector(".play").dataset.time);
       timer(seconds);
     }
@@ -109,8 +109,7 @@ function updateMode(session) {
    session? "WORK" : "BREAK";
 }
 
-function alarm(){
-
+function alarm() {
   var audio = new Audio("alert.mp3");
   audio.play();
 }
