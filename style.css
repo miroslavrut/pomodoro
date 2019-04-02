@@ -9,14 +9,14 @@ html {
 
 body {
   min-height: 100%;
+  background: #0E0B16;
 }
 
 .settings {
   display: flex;
   justify-content: center;
   flex-direction: row;
-  background: #f4f4f4;
-
+  
 }
 
 .settings > div {
@@ -24,11 +24,15 @@ body {
   margin: 0 2rem;
   width: 50px;
   justify-content: center;
+  color: #E7DFDD;
 }
 
 .settings-display {
   display: flex;
   justify-content: center;
+  color: #E7DFDD;
+  font-size: 1.5rem;
+  margin-top: 1rem;
 }
 
 .settings-display > div {
@@ -43,28 +47,50 @@ body {
                        ". mode mode ."
                        ". time time . "
                        "pause . . restart";
-  width: 250px;
+  width: 350px;
   height: 250px;
-  border: 1px solid black;
-  margin: 0 auto; 
+  border: 5px solid #E7DFDD;
+  border-radius: 5%;
+  margin: 0 auto;
+  margin-top: 1.1rem; 
 }
 
-.play { grid-area: play; }
+.play { 
+  grid-area: play;
+  cursor: pointer;
+}
 
-.stop { grid-area: stop; }
+.stop { 
+  grid-area: stop; 
+  cursor: pointer;
+}
 
-.time { grid-area: time; }
+.restart { 
+  grid-area: restart; 
+  cursor: pointer;
+}
 
-.restart { grid-area: restart; }
+.pause { 
+  grid-area: pause; 
+  cursor: pointer;
+}
 
-.mode { grid-area: mode; }
+.time { 
+  grid-area: time; 
+}
 
-.pause { grid-area: pause; }
-
+.mode { 
+  grid-area: mode; 
+}
 
 .timer > div {
-  border: 1px solid red;
   justify-content: center;
   text-align: center;
   font-size: 1.8em;
+  color: #E7DFDD;
+}
+
+button {
+  border-radius: 50%;
+  outline: none;
 }
