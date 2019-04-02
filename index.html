@@ -4,23 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>|POMODORO|</title>
+  <title>Document</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <div class="display">
-    <div class="buttons">
+  
+  <div class="settings">
+    <div class="work">
       <button class="incr-work">+</button>
-      <button class="timer-btn work"  data-time="1500">WORK</button>
+      <div>Work</div>
       <button class="decr-work">-</button>
+    </div>
+    <div class="break" data-time="3">
       <button class="incr-break">+</button>
-      <button class="timer-btn break" data-time="300">BREAK</button>
+      <div>Break</div>
       <button class="decr-break">-</button>
     </div>
-    <h1 class="time-left">25:00</h1>
   </div>
 
+  <div class="settings-display">
+    <div class="settings-work">25:00</div>
+    <div class="settings-break">05:00</div>
+  </div>
+
+  <div class="timer">
+    <div class="play" data-time="5">Play</div>
+    <div class="stop">Stop</div>
+    <div class="pause">Pause</div>
+    <div class="restart">Restart</div>
+    <div class="mode">Session</div>
+    <div class="time">25:00</div>
+  
+  </div>
   <script src="script.js"></script>
 </body>
 </html>
