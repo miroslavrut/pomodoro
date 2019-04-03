@@ -1,4 +1,4 @@
 TODO 
-- fix pause
+- refactor this mess of a code
 - improve style
-- add buttons
+- add button icons
