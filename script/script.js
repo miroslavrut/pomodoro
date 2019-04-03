@@ -1,5 +1,6 @@
 let countdown;
-let go = false;
+let go = true;
+let secondsLeft;
 
 function timer(seconds) {
   clearInterval(countdown);
@@ -7,13 +8,11 @@ function timer(seconds) {
   const now = Date.now();
   const end = now + seconds * 1000;
   
-  
-
   mode = document.querySelector(".mode").dataset.mode;
   
   countdown = setInterval(() => {
     if(!go) return;
-    const secondsLeft = Math.round((end - Date.now()) / 1000);
+    secondsLeft = Math.round((end - Date.now()) / 1000);
     displayTimeLeft(secondsLeft);
     if(secondsLeft == 0) {
       let seconds;
@@ -43,8 +42,11 @@ function displayTimeLeft(seconds) {
 }
 
 function startTimer() {
+  let seconds;
+  if(!go) seconds = secondsLeft;
+  else
+  seconds = parseInt(this.dataset.time);
   go = true;
-  const seconds = parseInt(this.dataset.time);
   timer(seconds);
 }
 
@@ -105,7 +107,7 @@ function updateMode(session) {
 }
 
 function alarm() {
-  var audio = new Audio("alert.mp3");
+  var audio = new Audio("./sound/alert.mp3");
   audio.play();
 }
 
